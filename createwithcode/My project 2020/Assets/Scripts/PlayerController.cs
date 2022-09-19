@@ -19,6 +19,6 @@ public class PlayerController : MonoBehaviour
         // nvm!!!
         // this is literally so crazyyyyyyyyyyyyyyyyy it like MOVE WTF
         transform.Translate(0, 0, 1);
-        transofrm.Translate(Vector3);
+        //transofrm.Translate(Vector3);
     }
 }
