@@ -18,7 +18,7 @@ public class PlayerController : MonoBehaviour
         // we wont move the vehicle ever it will take too long i will literally collapse and die before i can ever do anything in this class
         // nvm!!!
         // this is literally so crazyyyyyyyyyyyyyyyyy it like MOVE WTF
-        transform.Translate(0, 0, 1);
-        //transofrm.Translate(Vector3);
+        // transform.Translate(0, 0, 1);
+        transform.Translate(Vector3.forward * Time.deltaTime);
     }
 }
