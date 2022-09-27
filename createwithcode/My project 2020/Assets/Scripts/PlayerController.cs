@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public float speed = 5.0f;
-    public float turnSpeed;
-    public float horizontalInput;
+    //gaming
+    private float speed = 5.0f;
+    private float turnSpeed = 60.0f;
+    private float horizontalInput;
+    private float forwardInput;
 
     // Start is called before the first frame update
     void Start()
@@ -24,13 +26,18 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //this is where you play video gamnes crazy
         horizontalInput = Input.GetAxis("Horizontal");
+        forwardInput = Input.GetAxis("Vertical");
         
         // we wont move the vehicle ever it will take too long i will literally collapse and die before i can ever do anything in this class
         // nvm!!!
         // this is literally so crazyyyyyyyyyyyyyyyyy it like MOVE WTF
         // transform.Translate(0, 0, 1);
-        transform.Translate(Vector3.forward * Time.deltaTime * speed);
-        transform.Translate(Vector3.right * Time.deltaTime * turnSpeed * horizontalInput);
+        //vehicle go croom veoom here CRAZY
+        transform.Translate(Vector3.forward * Time.deltaTime * speed * forwardInput);
+        //veuhile go turny
+        transform.Rotate(Vector3.up, turnSpeed * horizontalInput * Time.deltaTime);
+        //transform.Translate(Vector3.right * Time.deltaTime * turnSpeed * horizontalInput);
     }
 }
