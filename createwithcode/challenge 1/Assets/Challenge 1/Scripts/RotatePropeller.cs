@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class RotatePropeller : MonoBehaviour
 {
-    public float turnSpeed = 50.0f;
+    private float turnSpeed = 4000.0f;
     // Start is called before the first frame update
     void Start()
     {
@@ -14,6 +14,6 @@ public class RotatePropeller : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.Rotate(Vector3.right, turnSpeed * Time.deltaTime);
+        transform.Rotate(Vector3.forward, turnSpeed * Time.deltaTime);
     }
 }
