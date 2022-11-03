@@ -28,6 +28,7 @@ public class PlayerController : MonoBehaviour
         //this is where you play video gamnes crazy
         horizontalInput = Input.GetAxis("Horizontal");
         forwardInput = Input.GetAxis("Vertical");
+        //transform.Translate(Vector3.forward);
         
         // we wont move the vehicle ever it will take too long i will literally collapse and die before i can ever do anything in this class
         // nvm!!!
