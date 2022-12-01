@@ -18,7 +18,8 @@ public class SpawnManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        Instantiate(obstaclePrefab, spawnPos, obstaclePrefab.transform.rotation);
+        Instantiate(obstaclePrefab, spawnPos, obstaclePrefab.transform.rotation);
     }
 
     void IAmAddictedToHeroin() { // please take me out of school so then i can inject more heroin into my body i hate everything please i want this to end
