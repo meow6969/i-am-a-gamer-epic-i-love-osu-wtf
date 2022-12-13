@@ -7,13 +7,13 @@ public class SpawnManager : MonoBehaviour
     public GameObject obstaclePrefab;
     private Vector3 spawnPos = new Vector3(25, 0, 0);
     private float startDelay = 2;
-    private float spawnInterval = 1.5f;
+    private float spawnInterval;
     private PlayerController playerControllerScript;
 
     // Start is called before the first frame update
     void Start()
     {
-        InvokeRepeating("IAmAddictedToHeroin", startDelay, spawnInterval);
+        Invoke("IAmAddictedToHeroin", startDelay);
         playerControllerScript = GameObject.Find("Player").GetComponent<PlayerController>();
     }
 
@@ -28,5 +28,7 @@ public class SpawnManager : MonoBehaviour
         if (!playerControllerScript.gameOver) {
             Instantiate(obstaclePrefab, spawnPos, obstaclePrefab.transform.rotation);
         }
+        spawnInterval = Random.Range(1, 5);
+        Invoke("IAmAddictedToHeroin", spawnInterval);
     }
 }
