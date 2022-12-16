@@ -5,6 +5,7 @@ using UnityEngine;
 public class SpawnManager : MonoBehaviour
 {
     public GameObject[] obstaclePrefabs;
+    public GameObject[] obstacleTallPrefabs;
     public GameObject scoreCounterPrefab;
     private Vector3 spawnPos = new Vector3(30, 0, 0);
     private float startDelay = 2;
@@ -42,7 +43,9 @@ public class SpawnManager : MonoBehaviour
                 Instantiate(scoreCounterPrefab, spawnPos, scoreCounterPrefab.transform.rotation);
             } else {
                 Instantiate(obstaclePrefabs[obstacleIndex], spawnPos, obstaclePrefabs[obstacleIndex].transform.rotation);
-                Instantiate(obstaclePrefabs[obstacleIndex], spawnPos + new Vector3((-obstaclePrefabs[obstacleIndex].GetComponent<BoxCollider>().size.x)/5, obstaclePrefabs[obstacleIndex].GetComponent<BoxCollider>().size.y, 0), obstaclePrefabs[obstacleIndex].transform.rotation);
+                Instantiate(obstaclePrefabs[obstacleIndex], spawnPos + new Vector3(0, 2, 0), obstaclePrefabs[obstacleIndex].transform.rotation);
+                //Instantiate(obstacleTallPrefabs[obstacleIndex], spawnPos, obstacleTallPrefabs[obstacleIndex].transform.rotation);
+
                 Instantiate(scoreCounterPrefab, spawnPos, scoreCounterPrefab.transform.rotation);
             }
         }

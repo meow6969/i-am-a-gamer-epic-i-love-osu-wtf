@@ -254,6 +254,10 @@ MonoBehaviour:
   - {fileID: 53607568278968298, guid: d137e1d92c1886742ba027add8fc19c3, type: 3}
   - {fileID: 6429116569183191303, guid: 513ceea428fe78d4e850fa59b8f9ecbd, type: 3}
   - {fileID: 8459097399658469281, guid: 3afd1080cb576d641bd1b83a908db255, type: 3}
+  obstacleTallPrefabs:
+  - {fileID: 6220570623451691135, guid: f7b7ed3b84e219b4c90da116fdf4fa90, type: 3}
+  - {fileID: 3420453218962780240, guid: 1a6f3ae8b82e2d14ea7576e9be8fc732, type: 3}
+  - {fileID: 2274880804052621184, guid: 7dcaafd3171c12944b0000ccfbc4ef6e, type: 3}
   scoreCounterPrefab: {fileID: 835542902521779591, guid: 1c9e3e1d56ef8c84ba79350e643a1d51, type: 3}
   defaultMaxSpawnTime: 5
   maxSpawnTime: 5
@@ -1066,6 +1070,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 53607568281151318, guid: d137e1d92c1886742ba027add8fc19c3, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 53607568281151318, guid: d137e1d92c1886742ba027add8fc19c3, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: af9d3101091f90d4db78a2097d5dcb84, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d137e1d92c1886742ba027add8fc19c3, type: 3}
 --- !u!1001 &835542902906083749
