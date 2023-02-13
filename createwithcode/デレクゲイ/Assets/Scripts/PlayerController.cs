@@ -50,18 +50,5 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space)) {
 
         }
-
-        if (transform.position.x > 30) {
-            transform.position = new Vector3(30, transform.position.y, transform.position.z);
-        }
-        else if (transform.position.x < -30) {
-            transform.position = new Vector3(-30, transform.position.y, transform.position.z);
-        }
-        if (transform.position.z > 30) {
-            transform.position = new Vector3(transform.position.x, transform.position.y, 30);
-        }
-        else if (transform.position.z < -30) {
-            transform.position = new Vector3(transform.position.x, transform.position.y, -30);
-        }
     }
 }
