@@ -13,6 +13,8 @@ public class PlayerController : MonoBehaviour
     private Rigidbody enemyRigidbody;
     private Vector3 awayFromPlayer;
     public GameObject powerupIndicator;
+    public int rocketNum = 16;
+    public GameObject rocket;
 
     // Start is called before the first frame update
     void Start()
@@ -38,6 +40,13 @@ public class PlayerController : MonoBehaviour
             hasPowerup = true;
             Destroy(other.gameObject);
             StartCoroutine(PowerupCountdownRoutine());
+        } else if (other.CompareTag("Powerup2")) {
+            for (int i = 0; i < rocketNum; i++){
+                Vector3 pos = RandomCircle(transform.position, 2.0f);
+                Quaternion rot = Quaternion.FromToRotation(Vector3.forward, transform.position-pos);
+                Instantiate(rocket, pos, rot);
+            }
+            Destroy(other.gameObject);
         }
     }
 
@@ -55,4 +64,13 @@ public class PlayerController : MonoBehaviour
         hasPowerup = false;
         powerupIndicator.gameObject.SetActive(false);
     }
+
+    Vector3 RandomCircle(Vector3 center, float radius){
+        float ang = Random.value * 360;
+        Vector3 pos;
+        pos.x = center.x + radius * Mathf.Sin(ang * Mathf.Deg2Rad);
+        pos.y = center.y + radius * Mathf.Cos(ang * Mathf.Deg2Rad);
+        pos.z = center.z;
+        return pos;
+     }
 }

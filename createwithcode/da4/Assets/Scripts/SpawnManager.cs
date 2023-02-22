@@ -4,20 +4,21 @@ using UnityEngine;
 
 public class SpawnManager : MonoBehaviour
 {
-    public GameObject enemyPrefab;
+    public GameObject[] enemyPrefabs;
     private float spawnRange = 9;
     private float spawnPosX;
     private float spawnPosZ;
     private Vector3 randomPos;
     public int enemyCount;
     public int waveNumber = 1;
-    public GameObject powerupPrefab;
+    public GameObject[] powerupPrefabs;
 
     // Start is called before the first frame update
     void Start()
     {
         SpawnEnemyWave(waveNumber);
-        Instantiate(powerupPrefab, GenerateSpawnPosition(), powerupPrefab.transform.rotation);
+        int powerupIndex = Random.Range(0, powerupPrefabs.Length);
+        Instantiate(powerupPrefabs[powerupIndex], GenerateSpawnPosition(), powerupPrefabs[powerupIndex].transform.rotation);
     }
 
     // Update is called once per frame
@@ -27,20 +28,22 @@ public class SpawnManager : MonoBehaviour
         if (enemyCount == 0) {
             waveNumber ++;
             SpawnEnemyWave(waveNumber);
-            Instantiate(powerupPrefab, GenerateSpawnPosition(), powerupPrefab.transform.rotation);
+            int powerupIndex = Random.Range(0, powerupPrefabs.Length);
+            Instantiate(powerupPrefabs[powerupIndex], GenerateSpawnPosition(), powerupPrefabs[powerupIndex].transform.rotation);
         }
     }
 
     void SpawnEnemyWave(int enemiesToSpawn) {
         for (int i = 0; i < enemiesToSpawn; i++) {
-            Instantiate(enemyPrefab, GenerateSpawnPosition(), enemyPrefab.transform.rotation);
+            int enemyIndex = Random.Range(0, enemyPrefabs.Length);
+            Instantiate(enemyPrefabs[enemyIndex], GenerateSpawnPosition(), enemyPrefabs[enemyIndex].transform.rotation);
         }
     }
 
     private Vector3 GenerateSpawnPosition() {
         spawnPosX = Random.Range(-spawnRange, spawnRange);
         spawnPosZ = Random.Range(-spawnRange, spawnRange);
-        randomPos = new Vector3(spawnPosX, 0, spawnPosZ);
+        randomPos = new Vector3(spawnPosX, 1, spawnPosZ);
         return randomPos;
     }
 }
