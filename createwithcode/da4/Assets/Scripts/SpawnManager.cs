@@ -12,6 +12,7 @@ public class SpawnManager : MonoBehaviour
     public int enemyCount;
     public int waveNumber = 1;
     public GameObject[] powerupPrefabs;
+    public GameObject boss;
 
     // Start is called before the first frame update
     void Start()
@@ -24,7 +25,7 @@ public class SpawnManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        enemyCount = FindObjectsOfType<Enemy>().Length;
+        enemyCount = GameObject.FindGameObjectsWithTag("Enemy").Length;
         if (enemyCount == 0) {
             waveNumber ++;
             SpawnEnemyWave(waveNumber);
@@ -34,9 +35,13 @@ public class SpawnManager : MonoBehaviour
     }
 
     void SpawnEnemyWave(int enemiesToSpawn) {
-        for (int i = 0; i < enemiesToSpawn; i++) {
-            int enemyIndex = Random.Range(0, enemyPrefabs.Length);
-            Instantiate(enemyPrefabs[enemyIndex], GenerateSpawnPosition(), enemyPrefabs[enemyIndex].transform.rotation);
+        if (waveNumber % 5 != 0 && waveNumber != 0) {
+            for (int i = 0; i < enemiesToSpawn; i++) {
+                int enemyIndex = Random.Range(0, enemyPrefabs.Length);
+                Instantiate(enemyPrefabs[enemyIndex], GenerateSpawnPosition(), enemyPrefabs[enemyIndex].transform.rotation);
+            }
+        } else {
+            Instantiate(boss, GenerateSpawnPosition(), boss.transform.rotation);
         }
     }
 

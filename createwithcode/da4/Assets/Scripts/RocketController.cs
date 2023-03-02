@@ -5,6 +5,7 @@ using UnityEngine;
 public class RocketController : MonoBehaviour
 {
     public int speed = 20;
+    public float explosionForce = 5.0f;
 
     // Start is called before the first frame update
     void Start()
@@ -15,6 +16,20 @@ public class RocketController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.position += Vector3.forward * Time.deltaTime * speed;
+        transform.position += transform.forward * Time.deltaTime * speed;
+        if (transform.position.x > 50.0f || transform.position.x < -50.0f || transform.position.z > 50.0f || transform.position.z < -50.0f) {
+            Destroy(gameObject);
+        } 
+    }
+
+    private void OnCollisionEnter(Collision collision) {
+        if (!collision.gameObject.CompareTag("Untagged")) {
+            Rigidbody enemyRigidbody = collision.gameObject.GetComponent<Rigidbody>();
+            Vector3 awayFromPlayer = (collision.gameObject.transform.position - transform.position);
+
+            enemyRigidbody.AddForce(awayFromPlayer * explosionForce, ForceMode.Impulse);
+
+            Destroy(gameObject);
+        }
     }
 }

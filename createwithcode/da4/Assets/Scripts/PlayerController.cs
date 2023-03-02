@@ -13,7 +13,7 @@ public class PlayerController : MonoBehaviour
     private Rigidbody enemyRigidbody;
     private Vector3 awayFromPlayer;
     public GameObject powerupIndicator;
-    public int rocketNum = 16;
+    private int rocketNum = 32;
     public GameObject rocket;
 
     // Start is called before the first frame update
@@ -31,6 +31,7 @@ public class PlayerController : MonoBehaviour
         powerupIndicator.transform.position = transform.position + new Vector3(0, -0.5f, 0);
         if (transform.position.y < -10) {
             transform.position = new Vector3(0, 0, 0);
+            playerRb.velocity = new Vector3(0, 0, 0);
         }
     }
 
@@ -42,9 +43,10 @@ public class PlayerController : MonoBehaviour
             StartCoroutine(PowerupCountdownRoutine());
         } else if (other.CompareTag("Powerup2")) {
             for (int i = 0; i < rocketNum; i++){
-                Vector3 pos = RandomCircle(transform.position, 2.0f);
-                Quaternion rot = Quaternion.FromToRotation(Vector3.forward, transform.position-pos);
-                Instantiate(rocket, pos, rot);
+                // Debug.Log(i);
+                var pos = RandomCircle(transform.position, 0.0f, ((float)i / (float)rocketNum) * 360f);
+                Quaternion rot = Quaternion.Euler(0, pos.Item2, 0);
+                Instantiate(rocket, pos.Item1, rot);
             }
             Destroy(other.gameObject);
         }
@@ -64,13 +66,15 @@ public class PlayerController : MonoBehaviour
         hasPowerup = false;
         powerupIndicator.gameObject.SetActive(false);
     }
-
-    Vector3 RandomCircle(Vector3 center, float radius){
-        float ang = Random.value * 360;
+    
+    (Vector3, float) RandomCircle(Vector3 center, float radius, float ang) {
+        // float ang = Random.value * 360;
+        // Debug.Log(ang);
+        // Debug.Log(Random.value);
         Vector3 pos;
         pos.x = center.x + radius * Mathf.Sin(ang * Mathf.Deg2Rad);
-        pos.y = center.y + radius * Mathf.Cos(ang * Mathf.Deg2Rad);
-        pos.z = center.z;
-        return pos;
+        pos.z = center.z + radius * Mathf.Cos(ang * Mathf.Deg2Rad);
+        pos.y = 1.0f;
+        return (pos, ang);
      }
 }
