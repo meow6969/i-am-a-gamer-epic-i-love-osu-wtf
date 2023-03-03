@@ -23,7 +23,7 @@ public class RocketController : MonoBehaviour
     }
 
     private void OnCollisionEnter(Collision collision) {
-        if (!collision.gameObject.CompareTag("Untagged")) {
+        if (collision.gameObject.CompareTag("Player")) {
             Rigidbody enemyRigidbody = collision.gameObject.GetComponent<Rigidbody>();
             Vector3 awayFromPlayer = (collision.gameObject.transform.position - transform.position);
 

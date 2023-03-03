@@ -7,6 +7,8 @@ TagManager:
   - Powerup
   - Enemy
   - Powerup2
+  - Powerup3
+  - Island
   layers:
   - Default
   - TransparentFX
