@@ -13,6 +13,7 @@ public class PlayerControllerX : MonoBehaviour
     public int powerUpDuration = 5;
     private float turboMode = 1.0f;
     private float turboModeOffset = 5.0f;
+    public ParticleSystem dirtParticle;
 
     private float normalStrength = 10; // how hard to hit enemy without powerup
     private float powerupStrength = 25; // how hard to hit enemy with powerup
@@ -21,6 +22,7 @@ public class PlayerControllerX : MonoBehaviour
     {
         playerRb = GetComponent<Rigidbody>();
         focalPoint = GameObject.Find("Focal Point");
+        dirtParticle.Stop();
     }
 
     void Update()
@@ -29,10 +31,12 @@ public class PlayerControllerX : MonoBehaviour
         float verticalInput = Input.GetAxis("Vertical");
         playerRb.AddForce(focalPoint.transform.forward * verticalInput * speed * Time.deltaTime * turboMode); 
 
-        if (Input.GetKey("space")) {
+        if (Input.GetKeyDown("space")) {
             turboMode = turboModeOffset;
-        } else {
+            dirtParticle.Play();
+        } else if (Input.GetKeyUp("space")) {
             turboMode = 1.0f;
+            dirtParticle.Stop();
         }
 
         // Set powerup indicator position to beneath player
