@@ -7,7 +7,8 @@ public class PlayerController : MonoBehaviour
     private Rigidbody playerRb;
     private float horizontalInput;
     private float verticalInput;
-    private float speed = 5.0f;
+    private float speed = 1000.0f;
+    private float zBound = 6;
 
     // Start is called before the first frame update
     void Start()
@@ -21,7 +22,13 @@ public class PlayerController : MonoBehaviour
         horizontalInput = Input.GetAxis("Horizontal");
         verticalInput = Input.GetAxis("Vertical");
 
-        transform.Translate(Vector3.right * Time.deltaTime * speed * horizontalInput);
-        transform.Translate(Vector3.forward * Time.deltaTime * speed * verticalInput);
+        playerRb.AddForce(Vector3.right * Time.deltaTime * speed * horizontalInput);
+        playerRb.AddForce(Vector3.forward * Time.deltaTime * speed * verticalInput);
+
+        if (transform.position.z > zBound) {
+            transform.position = new Vector3(transform.position.x, transform.position.y, zBound);
+        } else if (transform.position.z < -zBound) {
+            transform.position = new Vector3(transform.position.x, transform.position.y, -zBound);
+        }
     }
 }
