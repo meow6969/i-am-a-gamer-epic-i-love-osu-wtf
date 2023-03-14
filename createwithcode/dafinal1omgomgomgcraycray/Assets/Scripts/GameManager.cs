@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         StartCoroutine(SpawnTarget());
-        scoreText.text = "Score: " + score;
+        UpdateScore(0);
     }
 
     // Update is called once per frame
@@ -30,5 +30,10 @@ public class GameManager : MonoBehaviour
             Instantiate(targets[index]);
             SpawnTarget();
         }
+    }
+
+    public void UpdateScore(int scoreToAdd) {
+        score += scoreToAdd;
+        scoreText.text = "Score: " + score;
     }
 }

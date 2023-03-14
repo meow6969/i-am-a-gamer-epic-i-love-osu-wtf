@@ -612,6 +612,7 @@ MonoBehaviour:
   - {fileID: 3318927353428054076, guid: 84c0bd5940bce2047a6d94f2fa289764, type: 3}
   - {fileID: 8430823933216501403, guid: 4a8986adecc1c8c4786e1de07e071d25, type: 3}
   - {fileID: 4225904715459225502, guid: 56e5dd9869502d644b6a8b199943dfe5, type: 3}
+  scoreText: {fileID: 1910471559}
 --- !u!4 &1228674088
 Transform:
   m_ObjectHideFlags: 0
@@ -861,8 +862,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Score: '
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8abe1e37fe7bf433896970245b936749, type: 2}
-  m_sharedMaterial: {fileID: 21175996417216586, guid: 8abe1e37fe7bf433896970245b936749, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 57aabc49e3ceb774698e534d3d10eb96, type: 2}
+  m_sharedMaterial: {fileID: -8959537002274467539, guid: 57aabc49e3ceb774698e534d3d10eb96, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
