@@ -34,7 +34,7 @@ public class Target : MonoBehaviour
     }
 
     private void OnMouseDown() {
-        if (gameManager.isGameActive) {
+        if (gameManager.isGameActive && !gameManager.paused) {
             Destroy(gameObject);
             gameManager.UpdateScore(pointValue);
             Instantiate(explosionParticle, Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, transform.position.z)), explosionParticle.transform.rotation);
