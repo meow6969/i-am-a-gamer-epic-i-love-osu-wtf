@@ -33,7 +33,7 @@ public class Target : MonoBehaviour
         
     }
 
-    // private void OnMouseDown() {
+    // private void OnMouseDown() {  nyaaaaaaa :3 
     //     if (gameManager.isGameActive && !gameManager.paused) {
     //         Destroy(gameObject);
     //         gameManager.UpdateScore(pointValue);
