@@ -67,7 +67,7 @@ public class PlayerController : MonoBehaviour
             powerupIndicator.gameObject.SetActive(true);
             hasPowerup2 = true;
             Destroy(other.gameObject);
-            powerup2Countdown = 100f;
+            powerup2Countdown = 15f;
         }
     }
 

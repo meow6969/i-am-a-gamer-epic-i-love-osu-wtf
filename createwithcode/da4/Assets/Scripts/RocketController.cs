@@ -5,7 +5,7 @@ using UnityEngine;
 public class RocketController : MonoBehaviour
 {
     public int speed = 20;
-    public float explosionForce = 5.0f;
+    public float explosionForce = 10.0f;
 
     // Start is called before the first frame update
     void Start()
@@ -23,7 +23,7 @@ public class RocketController : MonoBehaviour
     }
 
     private void OnCollisionEnter(Collision collision) {
-        if (collision.gameObject.CompareTag("Player")) {
+        if (collision.gameObject.CompareTag("Enemy")) {
             Rigidbody enemyRigidbody = collision.gameObject.GetComponent<Rigidbody>();
             Vector3 awayFromPlayer = (collision.gameObject.transform.position - transform.position);
 
