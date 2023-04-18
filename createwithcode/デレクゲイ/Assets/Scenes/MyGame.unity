@@ -710,6 +710,7 @@ GameObject:
   - component: {fileID: 2004048598}
   - component: {fileID: 2004048597}
   - component: {fileID: 2004048601}
+  - component: {fileID: 2004048602}
   m_Layer: 0
   m_Name: Capsule
   m_TagString: Untagged
@@ -806,9 +807,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3434f0021307427478d316e3b1cf6ff6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speedOffset: 50
-  speedDecline: 1
-  player: {fileID: 2140450759}
+  speed: 0
+--- !u!114 &2004048602
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2004048596}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3844a6ffe98d2054aa11942232371291, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2140450759
 GameObject:
   m_ObjectHideFlags: 0
@@ -822,6 +833,7 @@ GameObject:
   - component: {fileID: 2140450761}
   - component: {fileID: 2140450760}
   - component: {fileID: 2140450764}
+  - component: {fileID: 2140450765}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -919,6 +931,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 15
   angle: 0
+--- !u!114 &2140450765
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2140450759}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3844a6ffe98d2054aa11942232371291, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2142438073
 GameObject:
   m_ObjectHideFlags: 0
