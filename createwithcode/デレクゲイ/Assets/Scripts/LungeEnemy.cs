@@ -7,6 +7,7 @@ public class LungeEnemy : MonoBehaviour
     private float speedOffset = 90.0f;
     private float speedDecline = 1.15f;
     public float speed = 0.0f;
+    [SerializeField] bool moving = true;
 
     private GameObject player;
 
@@ -20,16 +21,33 @@ public class LungeEnemy : MonoBehaviour
     void Update()
     {
         if (speed < 0.1f) {
-            speed = speedOffset;
-            float h = player.transform.position.x - transform.position.x;
-            float v = player.transform.position.z - transform.position.z;
-            float angle = -Mathf.Atan2(v,h) * Mathf.Rad2Deg;
+            if (moving) {
+                speed = speedOffset;
+                float h = player.transform.position.x - transform.position.x;
+                float v = player.transform.position.z - transform.position.z;
+                float angle = -Mathf.Atan2(v,h) * Mathf.Rad2Deg;
 
-            transform.rotation = Quaternion.Euler(180, angle, 0);
+                transform.rotation = Quaternion.Euler(180, angle, 0);
+            }
         } else {
             speed /= speedDecline;
         }
 
         transform.Translate(Vector3.right * speed * Time.deltaTime);
+    }
+
+    void OnCollisionEnter(Collision collision) {
+        // Debug.Log(collision.collider.name);
+        if (collision.collider.name == "Player") {
+            // Debug.Log(collision.collider.name);
+            moving = false;
+        }
+    }
+
+    void OnCollisionExit(Collision other) {
+        if (other.collider.name == "Player") {
+            // Debug.Log(collision.collider.name);
+            moving = true;
+        }
     }
 }

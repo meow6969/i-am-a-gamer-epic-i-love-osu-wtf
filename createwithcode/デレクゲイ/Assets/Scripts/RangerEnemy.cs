@@ -11,6 +11,8 @@ public class RangerEnemy : MonoBehaviour
     private GameObject player;
     private Rigidbody selfRb;
 
+    private Object rocket;
+
     // Start is called before the first frame update
     void Start()
     {
