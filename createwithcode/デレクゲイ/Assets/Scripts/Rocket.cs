@@ -5,6 +5,7 @@ using UnityEngine;
 public class Rocket : MonoBehaviour
 {
     private float speed = 10.0f;
+    private float lifespan;
 
     private GameObject player;
     private PlayerController playerController;
@@ -16,6 +17,7 @@ public class Rocket : MonoBehaviour
         player = GameObject.Find("Player");
         playerController = player.GetComponent<PlayerController>();
         selfRb = GetComponent<Rigidbody>();
+        lifespan = Random.Range(5, 15);
     }
 
     // Update is called once per frame
@@ -28,6 +30,11 @@ public class Rocket : MonoBehaviour
         float angle = -Mathf.Atan2(v,h) * Mathf.Rad2Deg;
 
         transform.rotation = Quaternion.Euler(180, angle - 90, 0);
+
+        lifespan -= Time.deltaTime;
+        if (lifespan < 0) {
+            Destroy(gameObject);
+        }
     }
 
     void OnCollisionEnter(Collision collision) {
