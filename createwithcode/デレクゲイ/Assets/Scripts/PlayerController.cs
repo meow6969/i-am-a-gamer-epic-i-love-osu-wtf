@@ -21,11 +21,15 @@ public class PlayerController : MonoBehaviour
     private float hypotenuseLength;
     public int health = 100;
 
+    private Object rocket;
+    private GameObject spawnedRocket;
+
     // Start is called before the first frame update
     void Start()
     {
         screenCenterX = Screen.width / 2;
         screenCenterY = Screen.height / 2;
+        rocket = Resources.Load("Rocket");
     }
 
     // Update is called once per frame
@@ -52,6 +56,14 @@ public class PlayerController : MonoBehaviour
             float angle = -Mathf.Atan2(v,h) * Mathf.Rad2Deg;
 
             transform.rotation = Quaternion.Euler (270, angle, 0);
+        }
+
+        if (Input.GetMouseButton(0)) {
+            Debug.Log(transform.localEulerAngles.z);
+            spawnedRocket = Instantiate(rocket, transform.position, Quaternion.Euler(new Vector3(-180, transform.rotation.eulerAngles.z, 0))) as GameObject;
+
+            spawnedRocket.GetComponent<RocketScript>().allegiance = true;
+            // rocketTimer = 0f;
         }
 
         if (Input.GetKeyDown(KeyCode.Space)) {

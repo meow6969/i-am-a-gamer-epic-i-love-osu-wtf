@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 5020528115102998516}
   m_Layer: 3
   m_Name: RusherEnemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

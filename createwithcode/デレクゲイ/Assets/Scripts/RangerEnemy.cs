@@ -13,7 +13,7 @@ public class RangerEnemy : MonoBehaviour
     private Rigidbody selfRb;
 
     private Object rocket;
-    private Object spawnedRocket;
+    private GameObject spawnedRocket;
 
     // Start is called before the first frame update
     void Start()
@@ -45,7 +45,9 @@ public class RangerEnemy : MonoBehaviour
         if (spawnedRocket == null) {
             rocketTimer += Time.deltaTime;
             if (rocketTimer > 3f) {
-                spawnedRocket = Instantiate(rocket, transform.position, rotation);
+                spawnedRocket = Instantiate(rocket, transform.position, rotation) as GameObject;
+                // spawnedRocket = t.gameObject;
+                spawnedRocket.GetComponent<RocketScript>().allegiance = false;
                 rocketTimer = 0f;
             } 
         }

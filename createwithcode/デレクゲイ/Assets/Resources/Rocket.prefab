@@ -105,7 +105,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6283200869711323258}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3844a6ffe98d2054aa11942232371291, type: 3}
   m_Name: 
@@ -122,6 +122,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1942b2f6387dc44db2e56f207c88276, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  allegiance: 0
 --- !u!54 &3187975654084133933
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -134,7 +135,7 @@ Rigidbody:
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 84
   m_CollisionDetection: 0
