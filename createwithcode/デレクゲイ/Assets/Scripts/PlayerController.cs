@@ -20,6 +20,7 @@ public class PlayerController : MonoBehaviour
     private float heightLength;
     private float hypotenuseLength;
     public int health = 100;
+    private float rocketTimer;
 
     private Object rocket;
     private GameObject spawnedRocket;
@@ -47,6 +48,7 @@ public class PlayerController : MonoBehaviour
         screenCenterX = Screen.width / 2;
         screenCenterY = Screen.height / 2;
         mousePos = Input.mousePosition;
+        rocketTimer -= Time.deltaTime;
         // if the mouse is in the window
         if (mousePos.x > 0.0f && mousePos.x < Screen.width && mousePos.y > 0.0f && mousePos.y < Screen.height) {
             widthLength = screenCenterX - mousePos.x;
@@ -55,15 +57,15 @@ public class PlayerController : MonoBehaviour
             float v = Input.mousePosition.y - screenCenterY;
             float angle = -Mathf.Atan2(v,h) * Mathf.Rad2Deg;
 
-            transform.rotation = Quaternion.Euler (270, angle, 0);
-        }
+            Debug.Log(angle);
+            transform.rotation = Quaternion.Euler(270, angle, 0);
 
-        if (Input.GetMouseButton(0)) {
-            Debug.Log(transform.localEulerAngles.z);
-            spawnedRocket = Instantiate(rocket, transform.position, Quaternion.Euler(new Vector3(-180, transform.rotation.eulerAngles.z, 0))) as GameObject;
+            if (Input.GetMouseButton(0) && rocketTimer < 0f) {
+                spawnedRocket = Instantiate(rocket, transform.position, Quaternion.Euler(0, angle + 90, 0)) as GameObject;
 
-            spawnedRocket.GetComponent<RocketScript>().allegiance = true;
-            // rocketTimer = 0f;
+                spawnedRocket.GetComponent<RocketScript>().allegiance = true;
+                rocketTimer = 0.2f;
+            }
         }
 
         if (Input.GetKeyDown(KeyCode.Space)) {

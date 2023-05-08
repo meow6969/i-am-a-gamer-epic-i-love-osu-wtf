@@ -27,8 +27,9 @@ public class RocketScript : MonoBehaviour
 
             // transform.rotation = Quaternion.Euler(180, angle - 90, 0);
 
-            speed = 15.0f;
-            lifespan = 30.0f;
+            speed = 30.0f;
+            lifespan = 20.0f;
+            selfRb.isKinematic = false;
         } else {
             gameObject.tag = "Enemy";
         }

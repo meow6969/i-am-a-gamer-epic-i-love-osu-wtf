@@ -719,6 +719,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 2140450759}
   cameraLag: 5
+  paralaxOffset: 100
 --- !u!1 &1148199663
 GameObject:
   m_ObjectHideFlags: 0
