@@ -10,11 +10,15 @@ public class LungeEnemy : MonoBehaviour
     [SerializeField] bool moving = true;
 
     private GameObject player;
+    private PlayerController playerController;
+    private Rigidbody selfRb;
 
     // Start is called before the first frame update
     void Start()
     {
         player = GameObject.Find("Player");
+        playerController = player.GetComponent<PlayerController>();
+        selfRb = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
@@ -40,6 +44,8 @@ public class LungeEnemy : MonoBehaviour
         // Debug.Log(collision.collider.name);
         if (collision.collider.name == "Player") {
             // Debug.Log(collision.collider.name);
+            playerController.decreaseHealth(25);
+
             moving = false;
         }
     }

@@ -29,9 +29,10 @@ public class RocketScript : MonoBehaviour
 
             speed = 30.0f;
             lifespan = 20.0f;
-            selfRb.isKinematic = false;
+            // selfRb.isKinematic = false;
         } else {
             gameObject.tag = "Enemy";
+            // selfRb.isKinematic = false;
         }
         // Debug.Log(allegiance);
     }

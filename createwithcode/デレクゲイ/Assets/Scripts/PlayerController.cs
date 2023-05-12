@@ -21,6 +21,13 @@ public class PlayerController : MonoBehaviour
     private float hypotenuseLength;
     public int health = 100;
     private float rocketTimer;
+    private float invulnerabilityTimer = 0;
+    private MeshRenderer selfMesh;
+    private int frameSkip = 5;
+    private int curSkip = 0;
+    public Material red;
+    public Material blue;
+    private bool isBlue = true;
 
     private Object rocket;
     private GameObject spawnedRocket;
@@ -31,12 +38,36 @@ public class PlayerController : MonoBehaviour
         screenCenterX = Screen.width / 2;
         screenCenterY = Screen.height / 2;
         rocket = Resources.Load("Rocket");
+        selfMesh = GetComponent<MeshRenderer>();
     }
 
     // Update is called once per frame
     void Update()
     {
-       
+        if (invulnerabilityTimer > 0f) {
+            invulnerabilityTimer -= Time.deltaTime;
+            curSkip -= 1;
+            if (curSkip < 0) {
+                // selfMesh.enabled = !selfMesh.enabled;
+                if (isBlue) {
+                    selfMesh.material = red;
+                    isBlue = false;
+                } else {
+                    selfMesh.material = blue;
+                    isBlue = true;
+                }
+                
+                curSkip = frameSkip;
+            }
+        } else {
+            // if (!selfMesh.enabled) {
+            //     selfMesh.enabled = true;
+            // }
+            if (!isBlue) {
+                    selfMesh.material = blue;
+                    isBlue = true;
+                }
+        }
 
         horizontalInput = Input.GetAxis("Horizontal");
         verticalInput = -Input.GetAxis("Vertical");
@@ -57,7 +88,7 @@ public class PlayerController : MonoBehaviour
             float v = Input.mousePosition.y - screenCenterY;
             float angle = -Mathf.Atan2(v,h) * Mathf.Rad2Deg;
 
-            Debug.Log(angle);
+            // Debug.Log(angle);
             transform.rotation = Quaternion.Euler(270, angle, 0);
 
             if (Input.GetMouseButton(0) && rocketTimer < 0f) {
@@ -74,7 +105,10 @@ public class PlayerController : MonoBehaviour
     }
 
     public void decreaseHealth(int damage) {
-        health -= damage;
-        healthText.text = "Health: " + health;
+        if (invulnerabilityTimer < 0.1f) {
+            health -= damage;
+            healthText.text = "Health: " + health;
+            invulnerabilityTimer = 5f;
+        }
     }
 }

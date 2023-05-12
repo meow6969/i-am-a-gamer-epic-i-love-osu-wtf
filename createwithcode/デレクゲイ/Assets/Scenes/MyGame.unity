@@ -1686,6 +1686,8 @@ MonoBehaviour:
   healthText: {fileID: 1505003240}
   angle: 0
   health: 100
+  red: {fileID: 2100000, guid: 0c94770b3d6d38341b2de8e52da0e886, type: 2}
+  blue: {fileID: 2100000, guid: 0c5bfcbdec7a46344a152ad46e93052e, type: 2}
 --- !u!114 &2140450765
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1710,7 +1712,7 @@ Rigidbody:
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
-  m_IsKinematic: 1
+  m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 4
+  m_Constraints: 126
   m_CollisionDetection: 0

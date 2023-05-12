@@ -15,7 +15,7 @@ public class Spawner : MonoBehaviour
     void Start()
     {
         player = GameObject.Find("Player");
-        timeToWait = Random.Range(1, 10);
+        timeToWait = Random.Range(5, 10);
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
 
