@@ -9,6 +9,8 @@ public class RocketScript : MonoBehaviour
     public bool allegiance;
 
     private GameObject player;
+    private GameObject gameManager;
+    private GameManager gameManagerScript;
     private PlayerController playerController;
     private Rigidbody selfRb;
 
@@ -16,6 +18,8 @@ public class RocketScript : MonoBehaviour
     void Start()
     {
         player = GameObject.Find("Player");
+        gameManager = GameObject.Find("GameManager");
+        gameManagerScript = gameManager.GetComponent<GameManager>();
         playerController = player.GetComponent<PlayerController>();
         selfRb = GetComponent<Rigidbody>();
         lifespan = Random.Range(5, 15);
@@ -59,6 +63,9 @@ public class RocketScript : MonoBehaviour
         if (allegiance && collision.collider.tag == "Enemy") {
             Destroy(collision.collider.gameObject);
             Destroy(gameObject);
+            if (!collision.gameObject.name.Contains("Rocket")) {
+                gameManagerScript.enemies --;
+            }
         } else if (!allegiance && collision.collider.name == "Player") { 
             playerController.decreaseHealth(15);
 

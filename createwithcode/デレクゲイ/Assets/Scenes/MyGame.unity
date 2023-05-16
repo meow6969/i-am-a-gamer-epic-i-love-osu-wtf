@@ -824,6 +824,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   debugScreen: {fileID: 200928552}
+  roundText: {fileID: 1528042974}
+  enemyText: {fileID: 1649056525}
   spawnsEnabled: 1
   spawners:
   - {fileID: 2013124444}
@@ -832,6 +834,8 @@ MonoBehaviour:
   - {fileID: 157888833}
   round: 1
   enemyCount: 0
+  enemiesToSpawn: 0
+  enemies: 0
 --- !u!4 &949731305
 Transform:
   m_ObjectHideFlags: 0
