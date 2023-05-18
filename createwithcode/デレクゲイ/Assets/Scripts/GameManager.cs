@@ -8,8 +8,10 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
     public GameObject debugScreen;
+    public GameObject titleScreen;
     public TextMeshProUGUI roundText;
     public TextMeshProUGUI enemyText;
+    public bool gameActive = false;
 
     public bool spawnsEnabled = true;
     [SerializeField] GameObject[] spawners;
@@ -33,6 +35,7 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // Debug.Log(titleRectTransform.rect)
 #if UNITY_EDITOR
         if (Input.GetKeyDown(KeyCode.Space)) {
             if (spawnsEnabled) {
