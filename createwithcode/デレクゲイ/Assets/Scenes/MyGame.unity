@@ -1059,7 +1059,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 908797133}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -1132,10 +1132,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   debugScreen: {fileID: 200928552}
   titleScreen: {fileID: 1543455616}
+  gameUI: {fileID: 218943976}
+  player: {fileID: 2140450759}
+  playerBarrel: {fileID: 908797133}
   roundText: {fileID: 1528042974}
   enemyText: {fileID: 1649056525}
   gameActive: 0
-  spawnsEnabled: 1
+  spawnsEnabled: 0
+  lockControls: 1
   spawners:
   - {fileID: 2013124444}
   - {fileID: 1440571871}
@@ -1566,7 +1570,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1481281247}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 949731304}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: StartGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1481281247
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2385,7 +2401,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2140450759}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -2460,6 +2476,7 @@ MonoBehaviour:
   health: 100
   red: {fileID: 2100000, guid: 0c94770b3d6d38341b2de8e52da0e886, type: 2}
   blue: {fileID: 2100000, guid: 0c5bfcbdec7a46344a152ad46e93052e, type: 2}
+  gameManager: {fileID: 949731303}
 --- !u!114 &2140450765
 MonoBehaviour:
   m_ObjectHideFlags: 0

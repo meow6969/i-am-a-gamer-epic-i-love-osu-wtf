@@ -38,7 +38,7 @@ public class RangerEnemy : MonoBehaviour
         float v = player.transform.position.z - transform.position.z;
         float angle = -Mathf.Atan2(v,h) * Mathf.Rad2Deg;
 
-        var rotation = Quaternion.Euler(180, angle, 0);
+        var rotation = Quaternion.Euler(0, angle, 0);
 
         transform.rotation = rotation;
 

@@ -31,6 +31,8 @@ public class PlayerController : MonoBehaviour
 
     private Object rocket;
     private GameObject spawnedRocket;
+    public GameObject gameManager;
+    private GameManager gameManagerScript;
 
     // Start is called before the first frame update
     void Start()
@@ -39,6 +41,7 @@ public class PlayerController : MonoBehaviour
         screenCenterY = Screen.height / 2;
         rocket = Resources.Load("Rocket");
         selfMesh = GetComponent<MeshRenderer>();
+        gameManagerScript = gameManager.GetComponent<GameManager>();
     }
 
     // Update is called once per frame
@@ -68,39 +71,36 @@ public class PlayerController : MonoBehaviour
                     isBlue = true;
                 }
         }
+        if (!gameManagerScript.lockControls) {
+            horizontalInput = Input.GetAxis("Horizontal");
+            verticalInput = -Input.GetAxis("Vertical");
+            //transform.Translate(Vector3.x * Time.deltaTime * speed * horizontalInput);
+            transform.position = new Vector3(transform.position.x + Time.deltaTime * speed * horizontalInput, transform.position.y, transform.position.z);
+            //transform.Translate(Vector3.z * Time.deltaTime * speed * verticalInput);
+            transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + Time.deltaTime * speed * verticalInput);
 
-        horizontalInput = Input.GetAxis("Horizontal");
-        verticalInput = -Input.GetAxis("Vertical");
-        //transform.Translate(Vector3.x * Time.deltaTime * speed * horizontalInput);
-        transform.position = new Vector3(transform.position.x + Time.deltaTime * speed * horizontalInput, transform.position.y, transform.position.z);
-        //transform.Translate(Vector3.z * Time.deltaTime * speed * verticalInput);
-        transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + Time.deltaTime * speed * verticalInput);
+            screenCenterX = Screen.width / 2;
+            screenCenterY = Screen.height / 2;
+            mousePos = Input.mousePosition;
+            rocketTimer -= Time.deltaTime;
+            // if the mouse is in the window
+            if (mousePos.x > 0.0f && mousePos.x < Screen.width && mousePos.y > 0.0f && mousePos.y < Screen.height) {
+                widthLength = screenCenterX - mousePos.x;
+                heightLength = screenCenterY - mousePos.y;
+                float h = Input.mousePosition.x - screenCenterX;
+                float v = Input.mousePosition.y - screenCenterY;
+                float angle = -Mathf.Atan2(v,h) * Mathf.Rad2Deg;
 
-        screenCenterX = Screen.width / 2;
-        screenCenterY = Screen.height / 2;
-        mousePos = Input.mousePosition;
-        rocketTimer -= Time.deltaTime;
-        // if the mouse is in the window
-        if (mousePos.x > 0.0f && mousePos.x < Screen.width && mousePos.y > 0.0f && mousePos.y < Screen.height) {
-            widthLength = screenCenterX - mousePos.x;
-            heightLength = screenCenterY - mousePos.y;
-            float h = Input.mousePosition.x - screenCenterX;
-            float v = Input.mousePosition.y - screenCenterY;
-            float angle = -Mathf.Atan2(v,h) * Mathf.Rad2Deg;
+                // Debug.Log(angle);
+                transform.rotation = Quaternion.Euler(270, angle, 0);
 
-            // Debug.Log(angle);
-            transform.rotation = Quaternion.Euler(270, angle, 0);
+                if (Input.GetMouseButton(0) && rocketTimer < 0f) {
+                    spawnedRocket = Instantiate(rocket, transform.position + transform.right * 1, Quaternion.Euler(0, angle + 90, 0)) as GameObject;
 
-            if (Input.GetMouseButton(0) && rocketTimer < 0f) {
-                spawnedRocket = Instantiate(rocket, transform.position, Quaternion.Euler(0, angle + 90, 0)) as GameObject;
-
-                spawnedRocket.GetComponent<RocketScript>().allegiance = true;
-                rocketTimer = 0.2f;
+                    spawnedRocket.GetComponent<RocketScript>().allegiance = true;
+                    rocketTimer = 0.2f;
+                }
             }
-        }
-
-        if (Input.GetKeyDown(KeyCode.Space)) {
-
         }
     }
 

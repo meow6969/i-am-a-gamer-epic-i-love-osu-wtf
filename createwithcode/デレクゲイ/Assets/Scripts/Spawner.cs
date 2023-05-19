@@ -25,7 +25,7 @@ public class Spawner : MonoBehaviour
         float v = player.transform.position.z - transform.position.z;
         float angle = -Mathf.Atan2(v,h) * Mathf.Rad2Deg;
 
-        var rotation = Quaternion.Euler(180, angle, 0);
+        var rotation = Quaternion.Euler(0, angle, 0);
         Instantiate(enemies[Random.Range (0, enemies.Length)], new Vector3(transform.position.x + Random.Range(-5f, 5f), 1, transform.position.z + Random.Range(-5f, 5f)), rotation);
     }
 }

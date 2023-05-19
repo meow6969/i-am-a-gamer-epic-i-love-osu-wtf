@@ -31,7 +31,7 @@ public class LungeEnemy : MonoBehaviour
                 float v = player.transform.position.z - transform.position.z;
                 float angle = -Mathf.Atan2(v,h) * Mathf.Rad2Deg;
 
-                transform.rotation = Quaternion.Euler(180, angle, 0);
+                transform.rotation = Quaternion.Euler(0, angle, 0);
             }
         } else {
             speed /= speedDecline;

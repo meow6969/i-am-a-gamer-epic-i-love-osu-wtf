@@ -9,11 +9,15 @@ public class GameManager : MonoBehaviour
 {
     public GameObject debugScreen;
     public GameObject titleScreen;
+    public GameObject gameUI;
+    public GameObject player;
+    public GameObject playerBarrel;
     public TextMeshProUGUI roundText;
     public TextMeshProUGUI enemyText;
     public bool gameActive = false;
 
-    public bool spawnsEnabled = true;
+    public bool spawnsEnabled = false;
+    public bool lockControls = true;
     [SerializeField] GameObject[] spawners;
     public int round = 1;
     public int enemyCount = 0;
@@ -69,5 +73,14 @@ public class GameManager : MonoBehaviour
 
     int GetRoundEnemyCount(int r) {
         return (int)(Mathf.Pow(0.000058f * r, 3) + Mathf.Pow(0.074032f * r, 2) + 0.718119f * r + 5.738699f);
+    }
+
+    public void StartGame() {
+        spawnsEnabled = true;
+        lockControls = false;
+        titleScreen.SetActive(false);
+        gameUI.SetActive(true);
+        player.GetComponent<MeshRenderer>().enabled = true;
+        playerBarrel.GetComponent<MeshRenderer>().enabled = true;
     }
 }
