@@ -9,6 +9,8 @@ public class RusherEnemy : MonoBehaviour
 
     private GameObject player;
     private PlayerController playerController;
+    private GameObject gameManager;
+    private GameManager gameManagerScript;
     private Rigidbody selfRb;
 
     // Start is called before the first frame update
@@ -16,13 +18,15 @@ public class RusherEnemy : MonoBehaviour
     {
         player = GameObject.Find("Player");
         playerController = player.GetComponent<PlayerController>();
+        gameManager = GameObject.Find("GameManager");
+        gameManagerScript = gameManager.GetComponent<GameManager>();
         selfRb = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (moving) {
+        if (moving && gameManagerScript.gameActive) {
             transform.Translate(Vector3.right * speed * Time.deltaTime);
         }
 
@@ -36,7 +40,7 @@ public class RusherEnemy : MonoBehaviour
     void OnCollisionEnter(Collision collision) {
         // Debug.Log(collision.collider.name);
         if (collision.collider.name == "Player") {
-            playerController.decreaseHealth(25);
+            playerController.DecreaseHealth(25);
             // Debug.Log(collision.collider.name);
             moving = false;
         }

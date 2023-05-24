@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
     private float horizontalInput;
     private float verticalInput;
     public TextMeshProUGUI healthText;
+    public TextMeshProUGUI scoreText;
     // public GameObject camera;
     public float angle = 0.0f;
     private Vector3 mousePos;
@@ -20,6 +21,7 @@ public class PlayerController : MonoBehaviour
     private float heightLength;
     private float hypotenuseLength;
     public int health = 100;
+    private int score = 0;
     private float rocketTimer;
     private float invulnerabilityTimer = 0;
     private MeshRenderer selfMesh;
@@ -47,6 +49,10 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (health <= 0) {
+            gameManagerScript.EndGame(score);
+        }
+
         if (invulnerabilityTimer > 0f) {
             invulnerabilityTimer -= Time.deltaTime;
             curSkip -= 1;
@@ -104,11 +110,16 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void decreaseHealth(int damage) {
+    public void DecreaseHealth(int damage) {
         if (invulnerabilityTimer < 0.1f) {
             health -= damage;
             healthText.text = "Health: " + health;
             invulnerabilityTimer = 5f;
         }
+    }
+    
+    public void IncreaseScore(int scoreIncrease) {
+        score += scoreIncrease;
+        scoreText.text = "Score: " + score;
     }
 }

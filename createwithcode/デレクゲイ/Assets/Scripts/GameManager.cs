@@ -4,12 +4,15 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 
 public class GameManager : MonoBehaviour
 {
     public GameObject debugScreen;
     public GameObject titleScreen;
     public GameObject gameUI;
+    public GameObject GameOverScreen;
     public GameObject player;
     public GameObject playerBarrel;
     public TextMeshProUGUI roundText;
@@ -24,6 +27,7 @@ public class GameManager : MonoBehaviour
     private float enemySpawnTimer = 5.0f;
     [SerializeField] private int enemiesToSpawn = 0;
     public int enemies = 0;
+    private int highScore = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -78,9 +82,72 @@ public class GameManager : MonoBehaviour
     public void StartGame() {
         spawnsEnabled = true;
         lockControls = false;
+        gameActive = true;
         titleScreen.SetActive(false);
         gameUI.SetActive(true);
         player.GetComponent<MeshRenderer>().enabled = true;
         playerBarrel.GetComponent<MeshRenderer>().enabled = true;
+    }
+
+    public void EndGame(int score) {
+        gameActive = false;
+        spawnsEnabled = false;
+        lockControls = true;
+        gameUI.SetActive(false);
+        GameOverScreen.SetActive(true);
+        GameOverScreen.transform.GetChild(1).gameObject.GetComponent<TextMeshProUGUI>().text = "Score: " + score;
+        LoadFile();
+        if (highScore < score) {
+            GameOverScreen.transform.GetChild(2).gameObject.GetComponent<TextMeshProUGUI>().text = "You got a new highscore!";
+            SaveFile(score);
+        } else {
+            GameOverScreen.transform.GetChild(2).gameObject.GetComponent<TextMeshProUGUI>().text = "Highscore: " + highScore;
+        }
+    }
+
+    public void RestartGame() {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    public void SaveFile(int score) {
+        string destination = Application.persistentDataPath + "/save.dat";
+        FileStream file;
+
+        if (File.Exists(destination)) {
+            file = File.OpenWrite(destination);
+        } else {
+            file = File.Create(destination);
+        }
+
+        GameData data = new GameData(score);
+        BinaryFormatter bf = new BinaryFormatter();
+        bf.Serialize(file, data);
+        file.Close();
+    }
+
+    public void LoadFile() {
+        string destination = Application.persistentDataPath + "/save.dat";
+        FileStream file;
+
+        if (File.Exists(destination)) {
+            file = File.OpenRead(destination);
+            BinaryFormatter bf = new BinaryFormatter();
+            GameData data = (GameData) bf.Deserialize(file);
+            file.Close();
+
+            highScore = data.score;
+
+            Debug.Log(data.score);
+        } else {
+            highScore = 0;
+        }
+    }
+}
+
+[System.Serializable] public class GameData {
+    public int score;
+
+    public GameData(int scoreInt) {
+        score = scoreInt;
     }
 }

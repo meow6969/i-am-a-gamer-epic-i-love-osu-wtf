@@ -11,6 +11,8 @@ public class LungeEnemy : MonoBehaviour
 
     private GameObject player;
     private PlayerController playerController;
+    private GameObject gameManager;
+    private GameManager gameManagerScript;
     private Rigidbody selfRb;
 
     // Start is called before the first frame update
@@ -18,6 +20,8 @@ public class LungeEnemy : MonoBehaviour
     {
         player = GameObject.Find("Player");
         playerController = player.GetComponent<PlayerController>();
+        gameManager = GameObject.Find("GameManager");
+        gameManagerScript = gameManager.GetComponent<GameManager>();
         selfRb = GetComponent<Rigidbody>();
     }
 
@@ -25,7 +29,7 @@ public class LungeEnemy : MonoBehaviour
     void Update()
     {
         if (speed < 0.1f) {
-            if (moving) {
+            if (moving && gameManagerScript.gameActive) {
                 speed = speedOffset;
                 float h = player.transform.position.x - transform.position.x;
                 float v = player.transform.position.z - transform.position.z;
@@ -44,7 +48,7 @@ public class LungeEnemy : MonoBehaviour
         // Debug.Log(collision.collider.name);
         if (collision.collider.name == "Player") {
             // Debug.Log(collision.collider.name);
-            playerController.decreaseHealth(25);
+            playerController.DecreaseHealth(25);
 
             moving = false;
         }

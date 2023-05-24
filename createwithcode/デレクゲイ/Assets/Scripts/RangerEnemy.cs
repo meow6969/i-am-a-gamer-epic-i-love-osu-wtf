@@ -10,6 +10,8 @@ public class RangerEnemy : MonoBehaviour
     private float rocketTimer = 0f;
 
     private GameObject player;
+    private GameObject gameManager;
+    private GameManager gameManagerScript;
     private Rigidbody selfRb;
 
     private Object rocket;
@@ -19,6 +21,8 @@ public class RangerEnemy : MonoBehaviour
     void Start()
     {
         player = GameObject.Find("Player");
+        gameManager = GameObject.Find("GameManager");
+        gameManagerScript = gameManager.GetComponent<GameManager>();
         selfRb = GetComponent<Rigidbody>();
         rocket = Resources.Load("Rocket");
     }
@@ -26,6 +30,10 @@ public class RangerEnemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!gameManagerScript.gameActive) {
+            return;
+        }
+
         float distance = Vector3.Distance(transform.position, player.transform.position);
 
         if (distance > farthestAway) {

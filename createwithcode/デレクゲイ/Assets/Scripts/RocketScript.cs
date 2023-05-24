@@ -50,7 +50,7 @@ public class RocketScript : MonoBehaviour
         }
         transform.Translate(Vector3.forward * speed * Time.deltaTime);
 
-        if (!allegiance) {
+        if (!allegiance && gameManagerScript.gameActive) {
             float h = player.transform.position.x - transform.position.x;
             float v = player.transform.position.z - transform.position.z;
             float angle = -Mathf.Atan2(v,h) * Mathf.Rad2Deg;
@@ -60,14 +60,15 @@ public class RocketScript : MonoBehaviour
     }
 
     void OnCollisionEnter(Collision collision) {
-        if (allegiance && collision.collider.tag == "Enemy") {
+        if (allegiance && collision.collider.tag == "Enemy" && gameManagerScript.gameActive) {
             Destroy(collision.collider.gameObject);
             Destroy(gameObject);
+            playerController.IncreaseScore(25 * gameManagerScript.round);
             if (!collision.gameObject.name.Contains("Rocket")) {
                 gameManagerScript.enemies --;
             }
-        } else if (!allegiance && collision.collider.name == "Player") { 
-            playerController.decreaseHealth(15);
+        } else if (!allegiance && collision.collider.name == "Player" && gameManagerScript.gameActive) { 
+            playerController.DecreaseHealth(15);
 
             Destroy(gameObject);
         }
