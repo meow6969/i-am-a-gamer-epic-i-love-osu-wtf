@@ -5,8 +5,6 @@ using UnityEngine;
 public class CameraController : MonoBehaviour
 {
     public GameObject player;
-    private float speedX;
-    private float speedZ;
     public float cameraLag = 7;
     public float paralaxOffset = 100;
 
@@ -19,13 +17,8 @@ public class CameraController : MonoBehaviour
     // Update is called once per frame
     void LateUpdate()
     {
-        speedX = (player.transform.position.x - transform.position.x) / cameraLag;
-        speedZ = (player.transform.position.z - transform.position.z) / cameraLag;
-        
-
-        // Vector3 mousePos = Input.mousePosition;
-        // float offsetX = mousePos.x / Screen.width;
-        // float offsetY = mousePos.y / Screen.height;
+        float speedX = (player.transform.position.x - transform.position.x) / cameraLag;
+        float speedZ = (player.transform.position.z - transform.position.z) / cameraLag;
 
         transform.Translate(new Vector3(speedX, speedZ, 0));
     }

@@ -8,8 +8,6 @@ using UnityEngine.UI;
 public class PlayerController : MonoBehaviour
 {
     public float speed = 15.0f;
-    private float horizontalInput;
-    private float verticalInput;
     public TextMeshProUGUI healthText;
     public TextMeshProUGUI scoreText;
     // public GameObject camera;
@@ -17,9 +15,6 @@ public class PlayerController : MonoBehaviour
     private Vector3 mousePos;
     private float screenCenterX;
     private float screenCenterY;
-    private float widthLength;
-    private float heightLength;
-    private float hypotenuseLength;
     public int health = 100;
     private int score = 0;
     private float rocketTimer;
@@ -53,11 +48,11 @@ public class PlayerController : MonoBehaviour
             gameManagerScript.EndGame(score);
         }
 
-        if (invulnerabilityTimer > 0f) {
+        if (invulnerabilityTimer > 0.1f) {
             invulnerabilityTimer -= Time.deltaTime;
+            // curSkip gets set to 5 every time so the color changes every 5 frames
             curSkip -= 1;
             if (curSkip < 0) {
-                // selfMesh.enabled = !selfMesh.enabled;
                 if (isBlue) {
                     selfMesh.material = red;
                     isBlue = false;
@@ -69,21 +64,15 @@ public class PlayerController : MonoBehaviour
                 curSkip = frameSkip;
             }
         } else {
-            // if (!selfMesh.enabled) {
-            //     selfMesh.enabled = true;
-            // }
             if (!isBlue) {
                     selfMesh.material = blue;
                     isBlue = true;
-                }
+            }
         }
         if (!gameManagerScript.lockControls) {
-            horizontalInput = Input.GetAxis("Horizontal");
-            verticalInput = -Input.GetAxis("Vertical");
-            //transform.Translate(Vector3.x * Time.deltaTime * speed * horizontalInput);
-            transform.position = new Vector3(transform.position.x + Time.deltaTime * speed * horizontalInput, transform.position.y, transform.position.z);
-            //transform.Translate(Vector3.z * Time.deltaTime * speed * verticalInput);
-            transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + Time.deltaTime * speed * verticalInput);
+            float horizontalInput = Input.GetAxis("Horizontal");
+            float verticalInput = -Input.GetAxis("Vertical");
+            transform.position = new Vector3(transform.position.x + Time.deltaTime * speed * horizontalInput, transform.position.y, transform.position.z + Time.deltaTime * speed * verticalInput);
 
             screenCenterX = Screen.width / 2;
             screenCenterY = Screen.height / 2;
@@ -91,13 +80,12 @@ public class PlayerController : MonoBehaviour
             rocketTimer -= Time.deltaTime;
             // if the mouse is in the window
             if (mousePos.x > 0.0f && mousePos.x < Screen.width && mousePos.y > 0.0f && mousePos.y < Screen.height) {
-                widthLength = screenCenterX - mousePos.x;
-                heightLength = screenCenterY - mousePos.y;
+                float widthLength = screenCenterX - mousePos.x;
+                float heightLength = screenCenterY - mousePos.y;
                 float h = Input.mousePosition.x - screenCenterX;
                 float v = Input.mousePosition.y - screenCenterY;
                 float angle = -Mathf.Atan2(v,h) * Mathf.Rad2Deg;
 
-                // Debug.Log(angle);
                 transform.rotation = Quaternion.Euler(270, angle, 0);
 
                 if (Input.GetMouseButton(0) && rocketTimer < 0f) {
